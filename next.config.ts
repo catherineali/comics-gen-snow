@@ -8,7 +8,9 @@ const nextConfig: NextConfig = {
         hostname: 'replicate.delivery',
       },
     ],
+    domains: ['storage.googleapis.com'],
   },
+  reactStrictMode: true,
 };
 
 export default nextConfig;
