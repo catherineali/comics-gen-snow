@@ -27,7 +27,24 @@ export async function POST(request: Request) {
             }
         );
 
-        const img_url = String(output)
+        const img_url = String(output);
+
+        // Save the image through Python backend
+        const saveResponse = await fetch('https://sundai-backend-176750765325.us-east4.run.app/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                prompt: prompt,
+                image_url: img_url
+            })
+        });
+
+        if (!saveResponse.ok) {
+            throw new Error('Failed to save image');
+        }
+
         return NextResponse.json({ imageUrl: img_url });
     }
     catch (error) {
